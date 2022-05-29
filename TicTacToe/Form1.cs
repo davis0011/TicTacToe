@@ -3,180 +3,194 @@ namespace TicTacToe
     public partial class Form1 : Form
     {
         public static char turn;
-        public static char playerturn;
-        public static string[] player1 = new string[2];
-        public static string[] player2 = new string[2];
+        public static int playerturn;
+        public static bool gameFinished;
+        public static int score1, score2;
+        //TODO DRAW
         public Form1()
         {
             InitializeComponent();
             turnpick();
-           
+            score1 = 0;
+            score2 = 0;
         }
         void turnpick()
         {
+
+            gameFinished = false;
             Random rd = new Random();
-            int start = rd.Next(3);
+            int start = rd.Next(2);
             if (start == 1)
             {
-                playerturn = '1';
+                playerturn = 1;
                 turn = 'X';
-                player1[0] = "1";
-                player1[1] = "X";
-                player2[0] = "2";
-                player2[1] = "O";
 
             }
             else
             {
-                playerturn = '1';
+                playerturn = 1;
                 turn = 'O';
-                player1[0] = "1";
-                player1[1] = "O";
-                player2[0] = "2";
-                player2[1] = "X";
             }
+            labelNowPlaying.Text = turn.ToString();
         }
         void ChangeTurn()
         {
-            if (turn == 'X')
-                turn = 'O';
-            else
+            if (!gameFinished)
             {
-                turn = 'X';
+                if (turn == 'X')
+                    turn = 'O';
+                else
+                {
+                    turn = 'X';
+                }
+                labelNowPlaying.Text = turn.ToString();
+                if (playerturn == 1)
+                    playerturn = 2;
+                else
+                    playerturn = 1;
             }
-            if (playerturn == '1')
-                playerturn = '2';
-            else
-                playerturn = '1';
         }
         void isWin()
         {
             if(button1.Text == button2.Text && button2.Text == button3.Text && button3.Text != "")
             {
-                    MessageBox.Show("The winner is player" + playerturn + "!");
+                gameFinished = true;  
             }
             if (button4.Text == button5.Text && button5.Text == button6.Text && button4.Text != "")
             {
-                MessageBox.Show("The winner is player" + playerturn + "!");
+                gameFinished = true;
             }
             if (button7.Text == button8.Text && button8.Text == button9.Text && button7.Text != "")
             {
-                MessageBox.Show("The winner is player" + playerturn + "!");
+                gameFinished = true;
             }
             if (button1.Text == button4.Text && button4.Text == button7.Text && button1.Text != "")
             {
-                MessageBox.Show("The winner is player" + playerturn + "!");
+                gameFinished = true;
             }
             if (button2.Text == button5.Text && button5.Text == button8.Text && button2.Text != "")
             {
-                MessageBox.Show("The winner is player" + playerturn + "!");
+                gameFinished = true;
             }
             if (button3.Text == button6.Text && button6.Text == button9.Text && button3.Text != "")
             {
-                MessageBox.Show("The winner is player" + playerturn + "!");
+                gameFinished = true;
             }
             if (button1.Text == button5.Text && button5.Text == button9.Text && button1.Text != "")
             {
-                MessageBox.Show("The winner is player" + playerturn + "!");
+                gameFinished = true;
             }
             if (button3.Text == button5.Text && button5.Text == button7.Text && button3.Text != "")
             {
+                gameFinished = true;
+            }
+            if (gameFinished)
+            {
+                if(playerturn == 1)
+                {
+                    score1++;
+                    labelPlayer1.Text = score1.ToString();
+                }
+                else
+                {
+                    score2++;
+                    labelPlayer2.Text = score2.ToString();
+                }
+                labelNowPlaying.Text = "None";
                 MessageBox.Show("The winner is player" + playerturn + "!");
             }
-        }
-        void enableButton()
-        {
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            isDraw();
         }
 
+        void isDraw()
+        {
+            if (button1.Text!=""&&button2.Text!= ""&&button3.Text!=""&&button4.Text!=""&&button5.Text!=""&&
+                button6.Text!=""&&button7.Text!=""&&button8.Text!=""&&button9.Text!="")
+            {
+                gameFinished = true;
+                MessageBox.Show("Its a draw!!");
+            }
+        }
         
         private void button1_Click(object sender, EventArgs e)
         {
-            if (button1.Text != "")
+            if (button1.Text != "" || gameFinished)
             {
                 return;
             }
             if (turn == 'X')
             {
                 button1.Text = "X";
-                isWin();
                 ChangeTurn();
             }
             else
             {
                 button1.Text = "O";
-                isWin();
                 ChangeTurn();
             }
-            
+            isWin();
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            if (button2.Text != "")
+            if (button2.Text != "" || gameFinished)
             {
                 return;
             }
             if (turn == 'X')
             {
                 button2.Text = "X";
-                isWin();
                 ChangeTurn();
             }
             else
             {
                 button2.Text = "O";
-                isWin();
                 ChangeTurn();
             }
+            isWin();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(button3.Text != "")
+            if(button3.Text != "" || gameFinished)
             {
                 return;
             }
             if (turn == 'X')
             {
                 button3.Text = "X";
-                isWin();
                 ChangeTurn();
             }
             else
             {
                 button3.Text = "O";
-                isWin();
                 ChangeTurn();
             }
+            isWin();
         }
 
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (button4.Text != "")
+            if (button4.Text != "" || gameFinished)
             {
                 return;
             }
             if (turn == 'X')
             {
                 button4.Text = "X";
-                isWin();
                 ChangeTurn();
             }
             else
             {
                 button4.Text = "O";
-                isWin();
                 ChangeTurn();
             }
+            isWin();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (button5.Text != "")
+            if (button5.Text != "" || gameFinished)
             {
                 return;
             }
@@ -196,7 +210,7 @@ namespace TicTacToe
         }
         private void button6_Click(object sender, EventArgs e)
         {
-            if (button6.Text != "")
+            if (button6.Text != "" || gameFinished)
             {
                 return;
             }
@@ -216,7 +230,7 @@ namespace TicTacToe
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (button7.Text != "")
+            if (button7.Text != "" || gameFinished)
             {
                 return;
             }
@@ -236,7 +250,7 @@ namespace TicTacToe
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (button8.Text != "")
+            if (button8.Text != "" || gameFinished)
             {
                 return;
             }
@@ -253,25 +267,70 @@ namespace TicTacToe
                 ChangeTurn();
             }
         }
+        void resetboard()
+        {
+            button1.Text = "";
+            button2.Text = "";
+            button3.Text = "";
+            button4.Text = "";
+            button5.Text = "";
+            button6.Text = "";
+            button7.Text = "";
+            button8.Text = "";
+            button9.Text = "";
+        }
+        void resetGame()
+        {
+            resetboard();
+            score1 = 0;
+            score2 = 0;
+            labelPlayer1.Text = "0";
+            labelPlayer2.Text = "0";
+        }
+        private void NewGameButton_Click(object sender, EventArgs e)
+        {
+            if (!gameFinished)
+            {
+                return;
+            }
+            var res = MessageBox.Show("Do you want to start a new game?", "New Game", MessageBoxButtons.YesNo);
+            if (res == DialogResult.Yes)
+            {
+                turnpick();
+                gameFinished = false;
+                resetboard();
+            }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            var res = MessageBox.Show("Do you want to reset the score?", "Reset Score", MessageBoxButtons.YesNo);
+            if (res == DialogResult.Yes)
+            {
+                turnpick();
+                gameFinished = false;
+                resetGame();
+            }
+        }
+
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (button9.Text != "")
+            if (button9.Text != "" || gameFinished)
             {
                 return;
             }
             if (turn == 'X')
             {
                 button9.Text = "X";
-                isWin();
                 ChangeTurn();
             }
             else
             {
                 button9.Text = "O";
-                isWin();
                 ChangeTurn();
             }
+            isWin();
         }
     }
 }
