@@ -47,7 +47,7 @@
             this.labelNowPlaying = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.resetButton = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
+            this.undoButton = new System.Windows.Forms.Button();
             this.newGameButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -237,7 +237,7 @@
             this.panel3.Controls.Add(this.labelNowPlaying);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.resetButton);
-            this.panel3.Controls.Add(this.button11);
+            this.panel3.Controls.Add(this.undoButton);
             this.panel3.Controls.Add(this.newGameButton);
             this.panel3.Location = new System.Drawing.Point(489, 141);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
@@ -280,16 +280,17 @@
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
-            // button11
+            // undoButton
             // 
-            this.button11.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button11.Location = new System.Drawing.Point(2, 238);
-            this.button11.Margin = new System.Windows.Forms.Padding(2);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(169, 100);
-            this.button11.TabIndex = 11;
-            this.button11.Text = "Undo";
-            this.button11.UseVisualStyleBackColor = true;
+            this.undoButton.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.undoButton.Location = new System.Drawing.Point(2, 238);
+            this.undoButton.Margin = new System.Windows.Forms.Padding(2);
+            this.undoButton.Name = "undoButton";
+            this.undoButton.Size = new System.Drawing.Size(169, 100);
+            this.undoButton.TabIndex = 11;
+            this.undoButton.Text = "Undo";
+            this.undoButton.UseVisualStyleBackColor = true;
+            this.undoButton.Click += new System.EventHandler(this.undoButton_Click);
             // 
             // newGameButton
             // 
@@ -319,6 +320,7 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         #endregion
@@ -340,7 +342,7 @@
         private Label label1;
         private Label label5;
         private Button resetButton;
-        private Button button11;
+        private Button undoButton;
         private Button newGameButton;
         private Label labelNowPlaying;
     }

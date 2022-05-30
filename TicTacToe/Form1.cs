@@ -6,13 +6,14 @@ namespace TicTacToe
         public static int playerturn;
         public static bool gameFinished;
         public static int score1, score2;
-        //TODO DRAW
+        private Stack<Move> moves;
         public Form1()
         {
             InitializeComponent();
             turnpick();
             score1 = 0;
             score2 = 0;
+            moves = new Stack<Move>();
         }
         void turnpick()
         {
@@ -86,7 +87,7 @@ namespace TicTacToe
             }
             if (gameFinished)
             {
-                if(playerturn == 1)
+                if (playerturn == 1)
                 {
                     score1++;
                     labelPlayer1.Text = score1.ToString();
@@ -99,7 +100,10 @@ namespace TicTacToe
                 labelNowPlaying.Text = "None";
                 MessageBox.Show("The winner is player" + playerturn + "!");
             }
-            isDraw();
+            else
+            {
+                isDraw();
+            }
         }
 
         void isDraw()
@@ -111,7 +115,20 @@ namespace TicTacToe
                 MessageBox.Show("Its a draw!!");
             }
         }
-        
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            if (gameFinished)
+            {
+                return;
+            }
+            if (moves.Count != 0)
+            {
+                Move undoMove = moves.Pop();
+                undoMove.GetButton().Text = "";
+                ChangeTurn();
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (button1.Text != "" || gameFinished)
@@ -121,14 +138,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button1.Text = "X";
-                ChangeTurn();
             }
             else
             {
                 button1.Text = "O";
-                ChangeTurn();
             }
+            Move m = new Move(button1, turn.ToString(), playerturn);
+            moves.Push(m);
             isWin();
+            ChangeTurn();
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -139,14 +157,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button2.Text = "X";
-                ChangeTurn();
             }
             else
             {
                 button2.Text = "O";
-                ChangeTurn();
             }
+            Move m = new Move(button2, turn.ToString(), playerturn);
+            moves.Push(m);
             isWin();
+            ChangeTurn();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -158,14 +177,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button3.Text = "X";
-                ChangeTurn();
             }
             else
             {
                 button3.Text = "O";
-                ChangeTurn();
             }
+            Move m = new Move(button3, turn.ToString(), playerturn);
+            moves.Push(m);
             isWin();
+            ChangeTurn();
         }
 
 
@@ -178,14 +198,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button4.Text = "X";
-                ChangeTurn();
             }
             else
             {
                 button4.Text = "O";
-                ChangeTurn();
             }
+            Move m = new Move(button4, turn.ToString(), playerturn);
+            moves.Push(m);
             isWin();
+            ChangeTurn();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -197,16 +218,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button5.Text = "X";
-                isWin();
-                ChangeTurn();
             }
             else
             {
                 button5.Text = "O";
-                isWin();
-                ChangeTurn();
             }
+            Move m = new Move(button5, turn.ToString(), playerturn);
+            moves.Push(m);
             isWin();
+            ChangeTurn();
         }
         private void button6_Click(object sender, EventArgs e)
         {
@@ -217,15 +237,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button6.Text = "X";
-                isWin();
-                ChangeTurn();
             }
             else
             {
                 button6.Text = "O";
-                isWin();
-                ChangeTurn();
             }
+            Move m = new Move(button6, turn.ToString(), playerturn);
+            moves.Push(m);
+            isWin();
+            ChangeTurn();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -237,15 +257,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button7.Text = "X";
-                isWin();
-                ChangeTurn();
             }
             else
             {
                 button7.Text = "O";
-                isWin();
-                ChangeTurn();
             }
+            Move m = new Move(button7, turn.ToString(), playerturn);
+            moves.Push(m);
+            isWin();
+            ChangeTurn();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -257,15 +277,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button8.Text = "X";
-                isWin();
-                ChangeTurn();
             }
             else
             {
                 button8.Text = "O";
-                isWin();
-                ChangeTurn();
             }
+            Move m = new Move(button8, turn.ToString(), playerturn);
+            moves.Push(m);
+            isWin();
+            ChangeTurn();
         }
         void resetboard()
         {
@@ -298,6 +318,10 @@ namespace TicTacToe
             {
                 turnpick();
                 gameFinished = false;
+                while(moves.Count > 0)
+                {
+                    moves.Pop();
+                }
                 resetboard();
             }
         }
@@ -309,10 +333,13 @@ namespace TicTacToe
             {
                 turnpick();
                 gameFinished = false;
+                while(moves.Count > 0)
+                {
+                    moves.Pop();
+                }
                 resetGame();
             }
         }
-
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -323,14 +350,15 @@ namespace TicTacToe
             if (turn == 'X')
             {
                 button9.Text = "X";
-                ChangeTurn();
             }
             else
             {
                 button9.Text = "O";
-                ChangeTurn();
             }
+            Move m = new Move(button9, turn.ToString(), playerturn);
+            moves.Push(m);
             isWin();
+            ChangeTurn();
         }
     }
 }
